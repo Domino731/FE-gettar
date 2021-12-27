@@ -5,15 +5,13 @@ import { AntDesign } from "@expo/vector-icons";
 import { theme } from "../../styles/theme";
 import { Entypo } from "@expo/vector-icons";
  import { useNavigation } from "@react-navigation/native";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/config";
+
 
 export const SignIn: FunctionComponent = () => {
 
-  // references
-  const navigation = useNavigation();
-
-  const [errorText, setErrorText] = useState<string>("as");
+  const [errorText, setErrorText] = useState<string>("");
 
   const [data, setData] = useState<{email: string, password: string}>({
     email: '', password: ''
@@ -21,11 +19,8 @@ export const SignIn: FunctionComponent = () => {
 
    /** auth operation responsible for logging user */
    const handleLogin =  useCallback( () => {
-    
-
     // clear previous errors
     setErrorText('');
-
     return (
        signInWithEmailAndPassword(auth, data.email, data.password)
         .then(() => {
@@ -36,12 +31,16 @@ export const SignIn: FunctionComponent = () => {
           // set errors and notify user about them
           const errorCode = error.code;
 
+          console.log(errorCode)
           // display errors
           if (errorCode === "auth/invalid-email") {
            setErrorText("Invalid e-mail");
           } else if (errorCode === "auth/missing-email") {
            setErrorText("Enter e-mail");
-          } 
+          }
+          else if (errorCode === 'auth/user-not-found'){
+            setErrorText('User with this e-mail does not exists')
+          }
           if (errorCode === "auth/wrong-password") {
           setErrorText("Wrong password");
           }
@@ -52,17 +51,22 @@ export const SignIn: FunctionComponent = () => {
     );
   }, [data]);
 
+  /** change data state */
+  const handleChangeData = useCallback((value, key: 'password' | 'email') => {
+       return setData(prev => ({...prev, [key]: value}))
+  }, []);
+
   return (
     <>
-      {errorText && <View style={authStyles.errorWrapper}>
+      {errorText ? <View style={authStyles.errorWrapper}>
 
-        <Text style={authStyles.errorText}>Error: asdasd</Text>
+        <Text style={authStyles.errorText}>Error: {errorText}</Text>
 
         {/* decorations */}
         <View style={authStyles.errorDecorationLineRight} />
         <View style={authStyles.errorDecorationLineRightSecond} />
         <View style={authStyles.errorDecorationRight} />
-        </View>}
+        </View> : null}
 
 
 
@@ -83,6 +87,7 @@ export const SignIn: FunctionComponent = () => {
               style={authStyles.input}
               placeholder="E-mail"
               placeholderTextColor="#717171"
+              onChangeText={(value) => handleChangeData(value, 'email')}
             />
             <View style={authStyles.inputDecoration} />
           </View>
@@ -104,10 +109,13 @@ export const SignIn: FunctionComponent = () => {
               style={authStyles.input}
               placeholder="Password"
               placeholderTextColor="#717171"
+              onChangeText={(value) => handleChangeData(value, 'password')}
             />
             <View style={authStyles.inputDecoration} />
           </View>
         </View>
+
+
 
         <View style={authStyles.buttonWrapper}>
           {/* decorations */}
@@ -115,7 +123,7 @@ export const SignIn: FunctionComponent = () => {
           <View style={authStyles.buttonDecorationRight} />
 
           {/* button */}
-          <Pressable style={authStyles.button}>
+          <Pressable style={authStyles.button} onPress={handleLogin}>
             <Text style={authStyles.buttonText}>Sign in</Text>
           </Pressable>
         </View>
