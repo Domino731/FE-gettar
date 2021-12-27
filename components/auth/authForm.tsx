@@ -39,9 +39,10 @@ export const AuthForm: FunctionComponent = () => {
         }}
             initialRouteName='dashboard'
           >
+              <Stack.Screen showLabel={false} name="passwordRecovery" component={PasswordRecovery} />
           <Stack.Screen showLabel={false} name="signIn" component={SignIn} />
           <Stack.Screen showLabel={false} name="signUp" component={SignUp} />
-          <Stack.Screen showLabel={false} name="passwordRecovery" component={PasswordRecovery} />
+        
         </Stack.Navigator>
       </NavigationContainer>
     </View>
