@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useCallback, useState } from "react";
-import { View, Text, TextInput, Pressable } from "react-native";
+import { View, Text, TextInput, Pressable, StyleSheet } from "react-native";
 import { authStyles } from "./generalStyles";
 import { AntDesign } from "@expo/vector-icons";
 import { theme } from "../../styles/theme";
@@ -17,7 +17,7 @@ export const PasswordRecovery: FunctionComponent = () => {
 
   const [errorText, setErrorText] = useState<string>("");
 
-  const [successSendFlag,  setSuccessSendFlag] = useState<boolean>(false);
+  const [successSendFlag, setSuccessSendFlag] = useState<boolean>(false);
 
   /** change email state */
   const handleChangeEmail = useCallback((text) => {
@@ -26,7 +26,6 @@ export const PasswordRecovery: FunctionComponent = () => {
 
   // send mail with next steps in order to reset user's password
   const handleResetPassword = useCallback(async () => {
-
     // clear error
     setErrorText("");
 
@@ -35,7 +34,7 @@ export const PasswordRecovery: FunctionComponent = () => {
         console.log("E-mail with next steps was sent");
 
         // change state and inform user about success auth operation
-         setSuccessSendFlag(true);
+        setSuccessSendFlag(true);
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -52,56 +51,113 @@ export const PasswordRecovery: FunctionComponent = () => {
 
   return (
     <>
-    {!successSendFlag ? <> 
-    
-    
-     {errorText ? (
-        <View style={authStyles.errorWrapper}>
-          <Text style={authStyles.errorText}>Error: {errorText}</Text>
+      {successSendFlag ? (
+        <>
+          {errorText ? (
+            <View style={authStyles.errorWrapper}>
+              <Text style={authStyles.errorText}>Error: {errorText}</Text>
 
-          {/* decorations */}
-          <View style={authStyles.errorDecorationLineRight} />
-          <View style={authStyles.errorDecorationLineRightSecond} />
-          <View style={authStyles.errorDecorationRight} />
-        </View>
-      ) : null}
+              {/* decorations */}
+              <View style={authStyles.errorDecorationLineRight} />
+              <View style={authStyles.errorDecorationLineRightSecond} />
+              <View style={authStyles.errorDecorationRight} />
+            </View>
+          ) : null}
 
-      <View style={authStyles.form}>
-        {/* email input */}
-        <View style={authStyles.inputWrapper}>
-          {/* icon */}
-          <View style={authStyles.icon}>
-            <View style={authStyles.iconWrapper}>
-              <View style={authStyles.iconDecoration} />
-              <Entypo name="email" size={25} color={theme.black} />
+          <View style={authStyles.form}>
+            {/* email input */}
+            <View style={authStyles.inputWrapper}>
+              {/* icon */}
+              <View style={authStyles.icon}>
+                <View style={authStyles.iconWrapper}>
+                  <View style={authStyles.iconDecoration} />
+                  <Entypo name="email" size={25} color={theme.black} />
+                </View>
+              </View>
+
+              {/* input */}
+              <View style={authStyles.inputContent}>
+                <TextInput
+                  onChangeText={handleChangeEmail}
+                  style={authStyles.input}
+                  placeholder="E-mail"
+                  placeholderTextColor="#717171"
+                />
+                <View style={authStyles.inputDecoration} />
+              </View>
+            </View>
+
+            <View style={authStyles.buttonWrapper}>
+              {/* decorations */}
+              <View style={authStyles.buttonDecorationLeft} />
+              <View style={authStyles.buttonDecorationRight} />
+
+              {/* button */}
+              <Pressable
+                style={authStyles.button}
+                onPress={handleResetPassword}
+              >
+                <Text style={authStyles.buttonText}>Send e-mail</Text>
+              </Pressable>
             </View>
           </View>
+        </>
+      ) : null}
 
-          {/* input */}
-          <View style={authStyles.inputContent}>
-            <TextInput
-              onChangeText={handleChangeEmail}
-              style={authStyles.input}
-              placeholder="E-mail"
-              placeholderTextColor="#717171"
-            />
-            <View style={authStyles.inputDecoration} />
-          </View>
-        </View>
+      {!successSendFlag ? (
+        <View style={styles.notificationWrapper}>
+          <Text style={styles.textSmall}>
+            The e-mail with next steps was sent successfully
+          </Text>
+          <Text style={styles.textBig}>Check your inbox</Text>
 
-        <View style={authStyles.buttonWrapper}>
           {/* decorations */}
-          <View style={authStyles.buttonDecorationLeft} />
-          <View style={authStyles.buttonDecorationRight} />
-
-          {/* button */}
-          <Pressable style={authStyles.button} onPress={handleResetPassword}>
-            <Text style={authStyles.buttonText}>Send e-mail</Text>
-          </Pressable>
+          <View style={styles.triangle} />
+          <View style={styles.decorationLine} />
         </View>
-      </View>
-    </> : null}
-     
+      ) : null}
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  notificationWrapper: {
+    backgroundColor: theme.electric,
+    marginTop: 23,
+    width: "100%",
+    paddingTop: 8,
+    paddingBottom: 8,
+    paddingLeft: 5,
+    paddingRight: 5,
+    position: "relative",
+    overflow: "hidden",
+  },
+  triangle: {
+    position: "absolute",
+    top: -11,
+    right: -11,
+    width: 22,
+    height: 22,
+    transform: [{ rotate: "45deg" }],
+    backgroundColor: theme.black,
+    borderWidth: 1,
+    zIndex: 2,
+  },
+  textSmall: {
+    fontSize: 18,
+    fontWeight: "bold",
+    letterSpacing: 2,
+  },
+  textBig: {
+    paddingTop: 12,
+    fontSize: 23,
+    fontWeight: "bold",
+  },
+  decorationLine: {
+    position: "absolute",
+    height: 2,
+    width: "55%",
+    backgroundColor: theme.black,
+    top: "70%"
+  }
+});
