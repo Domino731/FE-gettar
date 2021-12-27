@@ -51,7 +51,7 @@ export const PasswordRecovery: FunctionComponent = () => {
 
   return (
     <>
-      {successSendFlag ? (
+      {!successSendFlag ? (
         <>
           {errorText ? (
             <View style={authStyles.errorWrapper}>
@@ -104,7 +104,7 @@ export const PasswordRecovery: FunctionComponent = () => {
         </>
       ) : null}
 
-      {!successSendFlag ? (
+      {successSendFlag ? (
         <View style={styles.notificationWrapper}>
           <Text style={styles.textSmall}>
             The e-mail with next steps was sent successfully

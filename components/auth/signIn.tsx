@@ -1,10 +1,12 @@
-import React, { FunctionComponent, useState } from "react";
+import React, { FunctionComponent, useCallback, useState } from "react";
 import { View, Text, TextInput, Pressable } from "react-native";
 import { authStyles } from "./generalStyles";
 import { AntDesign } from "@expo/vector-icons";
 import { theme } from "../../styles/theme";
 import { Entypo } from "@expo/vector-icons";
  import { useNavigation } from "@react-navigation/native";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase/config";
 
 export const SignIn: FunctionComponent = () => {
 
@@ -12,6 +14,43 @@ export const SignIn: FunctionComponent = () => {
   const navigation = useNavigation();
 
   const [errorText, setErrorText] = useState<string>("as");
+
+  const [data, setData] = useState<{email: string, password: string}>({
+    email: '', password: ''
+  });
+
+   /** auth operation responsible for logging user */
+   const handleLogin =  useCallback( () => {
+    
+
+    // clear previous errors
+    setErrorText('');
+
+    return (
+       signInWithEmailAndPassword(auth, data.email, data.password)
+        .then(() => {
+
+        })
+        // catching errors
+        .catch((error) => {
+          // set errors and notify user about them
+          const errorCode = error.code;
+
+          // display errors
+          if (errorCode === "auth/invalid-email") {
+           setErrorText("Invalid e-mail");
+          } else if (errorCode === "auth/missing-email") {
+           setErrorText("Enter e-mail");
+          } 
+          if (errorCode === "auth/wrong-password") {
+          setErrorText("Wrong password");
+          }
+          if(errorCode === "auth/too-many-requests"){
+            setErrorText("Too many failed attempts to login, try restart your password");
+          }
+        })
+    );
+  }, [data]);
 
   return (
     <>
