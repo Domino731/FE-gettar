@@ -5,3 +5,7 @@ export interface IFPropsBorderLine {
   width?: string | number;
   radius?: number;
 }
+export interface IFPropsNavButton {
+  text: string;
+  active: boolean;
+}
