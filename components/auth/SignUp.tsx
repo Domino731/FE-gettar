@@ -7,6 +7,7 @@ import { Entypo } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/config";
+import { createUserDatabase } from "../../firebase/createAccount";
 
 export const SignUp: FunctionComponent = () => {
   // references
@@ -29,7 +30,7 @@ export const SignUp: FunctionComponent = () => {
 
   // creating user profile and his initial data in firestore database
   const authAction =  () => {
-
+    
     // remove previous errors
     setErrorText('');
 
@@ -37,9 +38,9 @@ export const SignUp: FunctionComponent = () => {
     return (
        createUserWithEmailAndPassword(auth, data.email, data.password)
         // if user's account has been created successfully, then redirect him to panel with account settings
-        .then(() => {
+        .then((userCredential) => {
           console.log("User created successfully");
-          window.location.href = "/dashboard/personalize";
+          createUserDatabase(userCredential.user.uid);
         })
 
         // catching errors
