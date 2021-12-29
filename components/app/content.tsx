@@ -39,9 +39,11 @@ export const Content: FunctionComponent = () => {
             }}
             initialRouteName="dashboard"
           >
+
             <Stack.Screen showLabel={false} name="notes" component={Notes} />
             <Stack.Screen showLabel={false} name="progress" component={Progress} />
             <Stack.Screen showLabel={false} name="tasks" component={Tasks} />
+           
           </Stack.Navigator>
 
           <Nav />

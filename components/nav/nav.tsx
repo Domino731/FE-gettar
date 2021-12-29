@@ -97,6 +97,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 20,
     letterSpacing: 3,
+    marginLeft: -9,
   },
   cornetLeft: {
     position: "absolute",

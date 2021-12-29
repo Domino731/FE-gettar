@@ -10,3 +10,16 @@ export interface IFPropsNavButton {
   active: boolean;
   changeSectionHandler: () => void;
 }
+export interface IFPropsCorner {
+  width: number;
+  height: number;
+  top?: number;
+  left?: number;
+  bottom?: number;
+  right?: number;
+  backgroundColor: string;
+  transformRotate?: number;
+  borderColor?: string;
+  borderWidth?: number;
+  additionStyles?: any;
+}

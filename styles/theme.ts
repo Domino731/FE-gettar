@@ -9,4 +9,6 @@ export const theme = {
   steelPink: "#CB1DCD",
   silver: "D1C5C0",
   errorRed: "#ff090f",
+  bluePrimary: "#48eff9",
+  darkSlateGray: "#12484c",
 };
