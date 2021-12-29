@@ -1,33 +1,74 @@
-import React, { FunctionComponent } from "react";
+import { useNavigation } from "@react-navigation/native";
+import React, { FunctionComponent, useCallback, useState } from "react";
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import { theme } from "../../styles/theme";
 import { IFPropsBorderLine, IFPropsNavButton } from "../../types";
 
 export const Nav: FunctionComponent = () => {
+  // reference
+  const navigation = useNavigation();
+
+  // state which is pointing at the active section
+  const [currentSection, setCurrentSection] = useState<
+    "notes" | "progress" | "tasks"
+  >("notes");
+
+  const handleChangeCurrentSection = useCallback(
+    (section: "notes" | "progress" | "tasks") => {
+      // @ts-ignore
+      navigation.navigate(section);
+      return setCurrentSection(section);
+    },
+    [currentSection]
+  );
+
   return (
     <View style={styles.container}>
-      <NavButton text={'tasks'} active/>
+      <NavButton
+        text={"tasks"}
+        active={currentSection ==="tasks"}
+        changeSectionHandler={() => handleChangeCurrentSection("tasks")}
+      />
 
-      <Pressable style={styles.btn}>
-        <Text style={styles.btnText}>Progress</Text>
-      </Pressable>
+      <NavButton
+        text={"progress"}
+        active={currentSection ==="progress"}
+        changeSectionHandler={() => handleChangeCurrentSection("progress")}
+      />
 
-      <Pressable style={styles.btn}>
-        <Text style={styles.btnText}> Notes</Text>
-      </Pressable>
+      <NavButton
+        text={"notes"}
+        active={currentSection ==="notes"}
+        changeSectionHandler={() => handleChangeCurrentSection("notes")}
+      />
+
     </View>
   );
 };
 
-const NavButton : FunctionComponent<IFPropsNavButton> = ({text, active}) => {
-  return <Pressable style={[styles.btn, {backgroundColor: theme.yellow}]}>
-  <Text style={[styles.btnText, {color: theme.black}]}> {text}</Text>
-  <View style={styles.cornetLeft}/>
-  <View style={styles.cornetRight}/>
-  <View style={styles.cornetBotLeft}/>
-  <View style={styles.cornetBotRight}/>
-</Pressable>
-}
+const NavButton: FunctionComponent<IFPropsNavButton> = ({
+  text,
+  active,
+  changeSectionHandler,
+}) => {
+  return (
+    <Pressable
+      style={[styles.btn, { backgroundColor: active ? theme.yellow : theme.black}]}
+      onPress={changeSectionHandler}
+    >
+      <Text style={[styles.btnText, { color: active ? theme.black : '#fff'}]}> {text}</Text>
+
+      {active && <>
+        <View style={styles.cornetLeft} />
+      <View style={styles.cornetRight} />
+      <View style={styles.cornetBotLeft} />
+      <View style={styles.cornetBotRight} />
+      </>}
+    
+    </Pressable>
+  );
+};
+
 const styles = StyleSheet.create({
   container: {
     width: "100%",
@@ -38,7 +79,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     overflow: "hidden",
-    paddingBottom: 8
+    paddingBottom: 8,
   },
   btn: {
     height: "100%",
@@ -49,7 +90,7 @@ const styles = StyleSheet.create({
 
     marginLeft: 14,
     marginRight: 14,
-    position: "relative"
+    position: "relative",
   },
   btnText: {
     color: "#fff",
@@ -93,5 +134,5 @@ const styles = StyleSheet.create({
     right: -10,
     backgroundColor: theme.black,
     transform: [{ rotate: "45deg" }],
-  }
+  },
 });

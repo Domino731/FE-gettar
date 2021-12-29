@@ -8,4 +8,5 @@ export interface IFPropsBorderLine {
 export interface IFPropsNavButton {
   text: string;
   active: boolean;
+  changeSectionHandler: () => void;
 }
