@@ -1,10 +1,12 @@
 import React, { FunctionComponent } from "react"
 import { View, Text, StyleSheet } from "react-native"
+import { AllNotesList } from "./allNotesList"
 import { Button } from "./button"
 
 export const Home : FunctionComponent = () => {
     return <View style={styles.container}>
         <Button/>
+        <AllNotesList/>
     </View>
 }
 

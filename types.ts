@@ -23,3 +23,6 @@ export interface IFPropsCorner {
   borderWidth?: number;
   additionStyles?: any;
 }
+export interface IFPropsNoteSmall {
+  location: "right" | "left";
+}
