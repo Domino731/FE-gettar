@@ -29,10 +29,7 @@ export const NoteSmall: FunctionComponent<IFPropsNoteSmall> = ({
           asd asdasdasdasda asdasdasdasd asdasdasdasdasdasd
         </Text>
 
-        <Text style={styles.noteId}>
-          Cyber ID: 23b54
-          
-        </Text>
+        <Text style={styles.noteId}>Cyber ID: 23b54</Text>
 
         {/* decorations */}
         <View style={styles.chipDecoration} />
@@ -52,6 +49,12 @@ export const NoteSmall: FunctionComponent<IFPropsNoteSmall> = ({
           transformRotate={-45}
         />
       </View>
+
+      {/* electric line decorations */}
+      <View style={styles.chipInput} />
+      <View style={styles.electricLineVertical}/>
+      <View style={styles.circleInput}/>
+      <View style={styles.electricLineHorizontal}/>
     </View>
   );
 };
@@ -59,9 +62,10 @@ export const NoteSmall: FunctionComponent<IFPropsNoteSmall> = ({
 const styles = StyleSheet.create({
   container: {
     width: "50%",
-    height: 210,
-    paddingTop: 10,
-    paddingBottom: 10,
+    height: 220,
+    paddingTop: 15,
+    paddingBottom: 15,
+    marginBottom: 20,
     position: "relative",
   },
   noteId: {
@@ -69,11 +73,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     position: "absolute",
     bottom: 0,
-    left: 20
+    left: 20,
     //letterSpacing: 1,
   },
-  title:{
-    fontSize: 17,
+  title: {
+    fontSize: 16,
     fontWeight: "bold",
     letterSpacing: 1,
     borderBottomWidth: 2,
@@ -109,4 +113,37 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 5,
     borderTopRightRadius: 5,
   },
+  chipInput: {
+    position: "absolute",
+    width: 50,
+    height: 7,
+    right: 20,
+    top: 8,
+    backgroundColor: theme.darkSlateGray,
+  },
+  electricLineVertical: {
+    position: "absolute",
+    width: 4,
+    height: 12,
+    right: 40,
+    top: -4,
+    backgroundColor: theme.crimson,
+  },
+  electricLineHorizontal: {
+    position: "absolute",
+    width: 200,
+    height: 4,
+    right: 45,
+    top: -8,
+    backgroundColor: theme.crimson,
+  },
+  circleInput: {
+    position: "absolute",
+    width: 9,
+    height: 9,
+    right: 38,
+    top: -10,
+    backgroundColor: theme.crimson,
+    borderRadius: 6
+  }
 });

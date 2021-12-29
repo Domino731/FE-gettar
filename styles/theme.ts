@@ -11,4 +11,5 @@ export const theme = {
   errorRed: "#ff090f",
   bluePrimary: "#48eff9",
   darkSlateGray: "#12484c",
+  crimson: "#e83123",
 };

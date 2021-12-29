@@ -7,6 +7,8 @@ export const AllNotesList : FunctionComponent = () => {
     return <View style={styles.container}>
         <NoteSmall location={'right'}/>
         <NoteSmall location={'left'}/>
+        <NoteSmall location={'right'}/>
+        <NoteSmall location={'left'}/>
     </View>
 }
 
@@ -15,8 +17,8 @@ container: {
     display: "flex",
     flexDirection: "row",
     flexWrap: 'wrap',
-    marginTop: 18,
+    marginTop: 37,
     width: '100%',
-    height: Dimensions.get('window').height - 140,
+    height: Dimensions.get('window').height - 160,
 }
 });
