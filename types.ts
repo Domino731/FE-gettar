@@ -26,3 +26,7 @@ export interface IFPropsCorner {
 export interface IFPropsNoteSmall {
   location: "right" | "left";
 }
+export interface IFNoteData {
+  title: {};
+  content: {};
+}

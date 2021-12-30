@@ -9,9 +9,10 @@ import {
 import { Nav } from "../nav/nav";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Notes } from "../notes/notes";
 import { Progress } from "../progress/progress";
 import { Tasks } from "../tasks/tasks";
+import { NotesList } from "../notes/home/home";
+import { AddNewNote } from "../notes/addNew/addNew";
 
 const Stack = createNativeStackNavigator();
 
@@ -39,11 +40,22 @@ export const Content: FunctionComponent = () => {
             }}
             initialRouteName="dashboard"
           >
-
-            <Stack.Screen showLabel={false} name="notes" component={Notes} />
-            <Stack.Screen showLabel={false} name="progress" component={Progress} />
+            <Stack.Screen
+              showLabel={false}
+              name="notes-add"
+              component={AddNewNote}
+            />
+            <Stack.Screen
+              showLabel={false}
+              name="notes"
+              component={NotesList}
+            />
+            <Stack.Screen
+              showLabel={false}
+              name="progress"
+              component={Progress}
+            />
             <Stack.Screen showLabel={false} name="tasks" component={Tasks} />
-           
           </Stack.Navigator>
 
           <Nav />

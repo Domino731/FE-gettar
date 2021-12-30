@@ -87,6 +87,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     textAlign: "justify",
     paddingRight: 7,
+    color: '#000',
   },
   note: {
     paddingLeft: 21,

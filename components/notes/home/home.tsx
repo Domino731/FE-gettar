@@ -4,7 +4,7 @@ import { theme } from "../../../styles/theme"
 import { AllNotesList } from "./allNotesList"
 import { Button } from "./button"
 
-export const Home : FunctionComponent = () => {
+export const NotesList : FunctionComponent = () => {
     return <View style={styles.container}>
         <Button/>
         <AllNotesList/>

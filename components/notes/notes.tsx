@@ -4,6 +4,6 @@ import { Home } from "./home/home"
 
 export const Notes : FunctionComponent = () => {
     return <>
-    <Home/>
+   
     </>
 }
