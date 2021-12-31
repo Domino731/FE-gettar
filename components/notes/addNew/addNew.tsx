@@ -1,26 +1,26 @@
 import React, { FunctionComponent, useState } from "react";
-import { TextInput, View, StyleSheet, Text } from "react-native";
+import { TextInput, View, StyleSheet, Text , Dimensions} from "react-native";
 import { theme } from "../../../styles/theme";
 import { IFNoteData } from "../../../types";
 import { Corner } from "../../general/corner";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 export const AddNewNote: FunctionComponent = () => {
+  // data about note
+  const [note, setNote] = useState<IFNoteData>({
+    title: "",
+    content: "asdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd asddddddddddddddddddddddddddddddddd asddddddddddddddddddddddddddddddddd asdddddddddddddddddddddddddddddddd assssssssssssssssssssssssssss assssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss ",
+  });
 
-    // data about note
-    const [note, setNote] = useState<IFNoteData>({
-        title: '',
-        content: ''
-    });
-
-    /**
-     * change note state
-     * @param value - new value
-     * @param key - object key - 'title' or 'content' 
-     * @returns setNote()
-     */
-    const handleChangeNote = (value: string, key: 'title') => {
-     return setNote(prev => ({...prev, [key]: value}))
-    }
+  /**
+   * change note state
+   * @param value - new value
+   * @param key - object key - 'title' or 'content'
+   * @returns setNote()
+   */
+  const handleChangeNote = (value: string, key: "title" | "content") => {
+    return setNote((prev) => ({ ...prev, [key]: value }));
+  };
 
   return (
     <View style={styles.container}>
@@ -42,13 +42,13 @@ export const AddNewNote: FunctionComponent = () => {
           />
         </View>
 
-        <TextInput 
-        style={styles.titleInput} 
-        onChangeText={v => handleChangeNote(v, 'title')}
-        // @ts-ignore
-        value={note.title}
-        placeholder="Put note title here"
-        placeholderTextColor="#fff"
+        <TextInput
+          style={styles.titleInput}
+          onChangeText={(v) => handleChangeNote(v, "title")}
+          // @ts-ignore
+          value={note.title}
+          placeholder="Put note title here"
+          placeholderTextColor="#fff"
         />
         <Corner
           width={40}
@@ -64,6 +64,21 @@ export const AddNewNote: FunctionComponent = () => {
           transformRotate={-135}
         />
       </View>
+
+      {/* input for note content */}
+
+      <KeyboardAwareScrollView>
+      <View style={styles.contentWrapper}>
+      <TextInput
+      style={styles.contentInput}
+        multiline={true}
+        numberOfLines={4}
+        onChangeText={v => handleChangeNote(v, 'content')}
+        // @ts-ignore
+        value={note.content}
+      />
+      </View>
+     </KeyboardAwareScrollView>
     </View>
   );
 };
@@ -85,7 +100,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    color: '#fff',
+    color: "#fff",
     fontWeight: "bold",
     letterSpacing: 1,
     textAlign: "center",
@@ -107,6 +122,17 @@ const styles = StyleSheet.create({
     paddingRight: 8,
     borderColor: theme.yellow,
     borderBottomWidth: 2,
-    color: "#fff"
+    color: "#fff",
   },
+  contentWrapper: {
+    width: "100%",
+    height: Dimensions.get('window').height - 200,
+    backgroundColor: theme.electric,
+  },
+  contentInput: {
+      lineHeight: 20,
+      width: "100%",
+      letterSpacing: 9,
+      backgroundColor: '#fff'
+  }
 });

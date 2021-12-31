@@ -1,10 +1,11 @@
-import { FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import {
   View,
   Text,
   StyleSheet,
   ImageBackground,
   Dimensions,
+  Keyboard
 } from "react-native";
 import { Nav } from "../nav/nav";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
@@ -26,7 +27,32 @@ const MyTheme = {
 };
 
 export const Content: FunctionComponent = () => {
+
+  // state which is pointing to active keyboard flag
+  const [ isKeyboardActive, setIsKeyboardActive ] = useState(false);
+
+  // add listeners which are responsible for detecting whether the keyboard is active
+  useEffect(() => {
+    Keyboard.addListener("keyboardDidShow", keyboardDidShow);
+    Keyboard.addListener("keyboardDidHide", keyboardDidHide);
+
+    // remove listeners on unmount
+    return () => {
+      Keyboard.removeListener("keyboardDidShow", keyboardDidShow);
+      Keyboard.removeListener("keyboardDidHide", keyboardDidHide);
+    };
+  }, []);
+
+  const keyboardDidShow = () => {
+    setIsKeyboardActive(true) 
+  }
+
+  const keyboardDidHide = () => {
+    setIsKeyboardActive(false)
+  }
+
   return (
+     
     <View style={styles.container}>
       <ImageBackground
         source={require("../../assets/background.jpg")}
@@ -58,7 +84,7 @@ export const Content: FunctionComponent = () => {
             <Stack.Screen showLabel={false} name="tasks" component={Tasks} />
           </Stack.Navigator>
 
-          <Nav />
+          {!isKeyboardActive && <Nav />}
         </NavigationContainer>
       </ImageBackground>
     </View>
@@ -67,8 +93,10 @@ export const Content: FunctionComponent = () => {
 
 const styles = StyleSheet.create({
   container: {
-    height: "100%",
+    flex: 1,
     position: "relative",
+    borderWidth: 2,
+    borderColor: "blue",
   },
   image: {
     flex: 1,
