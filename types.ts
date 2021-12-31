@@ -29,4 +29,5 @@ export interface IFPropsNoteSmall {
 export interface IFNoteData {
   title: {};
   content: {};
+  id?: string;
 }
