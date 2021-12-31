@@ -8,9 +8,21 @@ export const CableConnectionDecoration: FunctionComponent = () => {
       <View style={styles.line12} />
       <View style={styles.line13} />
 
+      <View style={styles.line2} />
+      <View style={styles.line22} />
+      <View style={styles.line23} />
+
       <View style={styles.line3} />
       <View style={styles.line32} />
       <View style={styles.line33} />
+
+
+      <View style={styles.connector1}/>
+      <View style={styles.connector12}/>
+      <View style={styles.connector2}/>
+      <View style={styles.connector22}/>
+      <View style={styles.connector3}/>
+      <View style={styles.connector32}/>
     </View>
   );
 };
@@ -40,7 +52,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 12,
     width: 3,
-    height: 49,
+    height: 58,
     left: 286,
     backgroundColor: theme.crimson,
   },
@@ -65,7 +77,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 45,
     width: 3,
-    height: 15,
+    height: 25,
     left: 235,
     backgroundColor: theme.crimson,
   },
@@ -74,24 +86,78 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: -4,
     width: 3,
-    height: 15,
-    left: 100,
+    height: 31,
+    left: 75,
     backgroundColor: theme.crimson,
   },
   line22: {
     position: "absolute",
-    top: 11,
+    top: 25,
     width: 189,
     height: 3,
-    left: 100,
+    left: 75,
     backgroundColor: theme.crimson,
   },
   line23: {
     position: "absolute",
-    top: 12,
     width: 3,
-    height: 49,
-    left: 286,
+    top: 28,
+    height: 42,
+    left: 261,
     backgroundColor: theme.crimson,
   },
+  connector1: {
+    position: "absolute",
+    width: 9,
+    height: 9,
+    backgroundColor: theme.crimson,
+    left: 97,
+    top: 8,
+    borderRadius: 2
+  },
+  connector12: {
+    position: "absolute",
+    width: 9,
+    height: 9,
+    backgroundColor: theme.crimson,
+    left: 283,
+    top: 8,
+    borderRadius: 2
+},
+connector2: {
+    position: "absolute",
+    width: 9,
+    height: 9,
+    backgroundColor: theme.crimson,
+    left: 72,
+    top: 22,
+    borderRadius: 2
+  },
+  connector22: {
+    position: "absolute",
+    width: 9,
+    height: 9,
+    backgroundColor: theme.crimson,
+    left: 258,
+    top: 22,
+    borderRadius: 2
+},
+connector3: {
+    position: "absolute",
+    width: 9,
+    height: 9,
+    backgroundColor: theme.crimson,
+    left: 47,
+    top: 39,
+    borderRadius: 2
+  },
+  connector32: {
+    position: "absolute",
+    width: 9,
+    height: 9,
+    backgroundColor: theme.crimson,
+    left: 232,
+    top: 39,
+    borderRadius: 2
+},
 });

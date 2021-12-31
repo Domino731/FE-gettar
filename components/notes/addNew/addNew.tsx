@@ -138,7 +138,7 @@ export const AddNewNote: FunctionComponent = () => {
 
 const styles = StyleSheet.create({
   sendButtonWrapper: {
-     marginTop: 48,
+     marginTop: 57,
     overflow: 'hidden',
     position: 'relative'
   },
@@ -162,9 +162,10 @@ const styles = StyleSheet.create({
     overflow: "hidden"
   },
   sendTitle: {
-fontSize: 14,
+fontSize: 16,
 fontWeight: "bold",
-letterSpacing: 1
+letterSpacing: 1,
+color: theme.crimson
   },
   container: {
     paddingLeft: 12,
