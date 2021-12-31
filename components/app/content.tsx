@@ -5,7 +5,9 @@ import {
   StyleSheet,
   ImageBackground,
   Dimensions,
-  Keyboard
+  Keyboard,
+  KeyboardAvoidingView,
+  ScrollView,
 } from "react-native";
 import { Nav } from "../nav/nav";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
@@ -27,9 +29,8 @@ const MyTheme = {
 };
 
 export const Content: FunctionComponent = () => {
-
   // state which is pointing to active keyboard flag
-  const [ isKeyboardActive, setIsKeyboardActive ] = useState(false);
+  const [isKeyboardActive, setIsKeyboardActive] = useState(false);
 
   // add listeners which are responsible for detecting whether the keyboard is active
   useEffect(() => {
@@ -44,50 +45,57 @@ export const Content: FunctionComponent = () => {
   }, []);
 
   const keyboardDidShow = () => {
-    setIsKeyboardActive(true) 
-  }
+    setIsKeyboardActive(true);
+  };
 
   const keyboardDidHide = () => {
-    setIsKeyboardActive(false)
-  }
+    setIsKeyboardActive(false);
+  };
 
   return (
-     
-    <View style={styles.container}>
-      <ImageBackground
-        source={require("../../assets/background.jpg")}
-        resizeMode="cover"
-        style={styles.image}
-      >
-        <NavigationContainer theme={MyTheme}>
-          <Stack.Navigator
-            screenOptions={{
-              headerShown: false,
-            }}
-            initialRouteName="dashboard"
-          >
-            <Stack.Screen
-              showLabel={false}
-              name="notes-add"
-              component={AddNewNote}
-            />
-            <Stack.Screen
-              showLabel={false}
-              name="notes"
-              component={NotesList}
-            />
-            <Stack.Screen
-              showLabel={false}
-              name="progress"
-              component={Progress}
-            />
-            <Stack.Screen showLabel={false} name="tasks" component={Tasks} />
-          </Stack.Navigator>
+    <ImageBackground
+      source={require("../../assets/background.jpg")}
+      resizeMode="cover"
+      style={styles.image}
+    >
+      <KeyboardAvoidingView style={{ flex: 1 }}>
+        <View style={styles.container}>
+          <ScrollView  contentContainerStyle={{ flexGrow: 1, height: '100%'}}>
+            <NavigationContainer theme={MyTheme}>
+              <Stack.Navigator
+                screenOptions={{
+                  headerShown: false,
+                }}
+                initialRouteName="dashboard"
+              >
+                <Stack.Screen
+                  showLabel={false}
+                  name="notes-add"
+                  component={AddNewNote}
+                />
+                <Stack.Screen
+                  showLabel={false}
+                  name="notes"
+                  component={NotesList}
+                />
+                <Stack.Screen
+                  showLabel={false}
+                  name="progress"
+                  component={Progress}
+                />
+                <Stack.Screen
+                  showLabel={false}
+                  name="tasks"
+                  component={Tasks}
+                />
+              </Stack.Navigator>
 
-          {!isKeyboardActive && <Nav />}
-        </NavigationContainer>
-      </ImageBackground>
-    </View>
+              {!isKeyboardActive && <Nav />}
+            </NavigationContainer>
+          </ScrollView>
+        </View>
+      </KeyboardAvoidingView>
+    </ImageBackground>
   );
 };
 

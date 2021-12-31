@@ -1,16 +1,25 @@
 import React, { FunctionComponent, useState } from "react";
-import { TextInput, View, StyleSheet, Text , Dimensions, Pressable} from "react-native";
+import {
+  TextInput,
+  View,
+  StyleSheet,
+  Text,
+  Dimensions,
+  Pressable,
+  Keyboard
+} from "react-native";
 import { theme } from "../../../styles/theme";
 import { IFNoteData } from "../../../types";
 import { Corner } from "../../general/corner";
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { CableConnectionDecoration } from "./cableConnectionDecoration";
 
 export const AddNewNote: FunctionComponent = () => {
   // data about note
   const [note, setNote] = useState<IFNoteData>({
     title: "",
-    content: "asdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd asddddddddddddddddddddddddddddddddd asddddddddddddddddddddddddddddddddd asdddddddddddddddddddddddddddddddd assssssssssssssssssssssssssss assssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss ",
+    content:
+      "asdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd asddddddddddddddddddddddddddddddddd asddddddddddddddddddddddddddddddddd asdddddddddddddddddddddddddddddddd assssssssssssssssssssssssssss assssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss ",
   });
 
   /**
@@ -69,89 +78,87 @@ export const AddNewNote: FunctionComponent = () => {
       {/* input for note content */}
 
       <KeyboardAwareScrollView>
-      <View style={styles.contentWrapper}>
-      {/* <TextInput
+        <View style={styles.contentWrapper}>
+          <TextInput
       style={styles.contentInput}
         multiline={true}
         numberOfLines={4}
         onChangeText={v => handleChangeNote(v, 'content')}
         // @ts-ignore
         value={note.content}
-      /> */}
+        onSubmitEditing={()=>{Keyboard.dismiss()}}
+      />
 
-      {/* decorations */}
-      <View style={styles.noteOutput}/>
-      <View style={styles.cablesWrapper}>
-        <CableConnectionDecoration/>
-      </View>
-      </View>
+          {/* decorations */}
+          <View style={styles.noteOutput} />
+          <View style={styles.cablesWrapper}>
+            <CableConnectionDecoration />
+          </View>
+        </View>
 
+        <View style={styles.sendButtonWrapper}>
+          <Pressable style={styles.sendButton}>
+            <Text style={styles.sendText}> Add note to cyberdesk</Text>
+          </Pressable>
 
-
-
-
-
-      <View style={styles.sendButtonWrapper}>
-        <Pressable style={styles.sendButton}>
-          <Text>Add note to cyberdesk</Text>
-        </Pressable>
-
-
-        {/* title */}
-        <View style={styles.sendTitleWrapper}>
-             <Text style={styles.sendTitle}>System online</Text>
-             <Corner
-            width={16}
-            height={16}
-            left={-8}
-            top={-8}
-            backgroundColor={theme.darkSlateGray}
+          {/* title */}
+          <View style={styles.sendTitleWrapper}>
+            <Text style={styles.sendTitle}>System online</Text>
+            <Corner
+              width={16}
+              height={16}
+              left={-8}
+              top={-8}
+              backgroundColor={theme.darkSlateGray}
+              additionStyles={{
+                borderTopWidth: 3,
+                zIndex: 2,
+              }}
+              transformRotate={-135}
+            />
+          </View>
+          {/* decorations */}
+          <Corner
+            width={40}
+            height={40}
+            left={-21}
+            bottom={-21}
+            backgroundColor={theme.yellow}
+            borderColor={theme.electric}
             additionStyles={{
               borderTopWidth: 3,
               zIndex: 2,
             }}
-            transformRotate={-135}
+            transformRotate={0}
           />
-
+          <View style={styles.sendIndentation} />
         </View>
-        {/* decorations */}
-        <Corner
-          width={40}
-          height={40}
-          left={-21}
-          bottom={-21}
-          backgroundColor={theme.yellow}
-          borderColor={theme.electric}
-          additionStyles={{
-            borderTopWidth: 3,
-            zIndex: 2,
-          }}
-          transformRotate={0}
-        />
-        <View style={styles.sendIndentation}/>
-      </View>
-
-     </KeyboardAwareScrollView>
+      </KeyboardAwareScrollView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+
+  
   sendButtonWrapper: {
-     marginTop: 57,
-    overflow: 'hidden',
-    position: 'relative'
+    marginTop: 57,
+    overflow: "hidden",
+    position: "relative",
   },
   sendButton: {
     borderWidth: 2,
     borderColor: theme.electric, // theme.darkSlateGray
-    width: '100%',
+    width: "100%",
     height: 70,
-    backgroundColor: theme.darkSlateGray
+    backgroundColor: theme.darkSlateGray,
+    paddingTop: 10,
+    paddingLeft: 8,
+    overflow: "hidden",
   },
   sendTitleWrapper: {
     position: "absolute",
-    bottom:  0,
+    bottom: 0,
     right: 0,
     width: "45%",
     height: 29,
@@ -159,17 +166,25 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    overflow: "hidden"
+    overflow: "hidden",
+    flexDirection: "row",
+  },
+  sendText: {
+    fontSize: 17,
+    fontWeight: "bold",
+    letterSpacing: 1,
+    color: '#fff'
   },
   sendTitle: {
-fontSize: 16,
-fontWeight: "bold",
-letterSpacing: 1,
-color: theme.crimson
+    fontSize: 16,
+    fontWeight: "bold",
+    letterSpacing: 1,
+    color: theme.crimson,
   },
   container: {
     paddingLeft: 12,
     paddingRight: 12,
+    height: '100%',
   },
   titleWrapper: {
     position: "relative",
@@ -183,7 +198,7 @@ color: theme.crimson
   },
   title: {
     fontSize: 18,
-    color: "#fff",
+    color: theme.crimson,
     fontWeight: "bold",
     letterSpacing: 1,
     textAlign: "center",
@@ -209,19 +224,22 @@ color: theme.crimson
   },
   contentWrapper: {
     width: "100%",
-    height: Dimensions.get('window').height - 300,
+    height: Dimensions.get("window").height - 300,
     backgroundColor: theme.electric,
     position: "relative",
-    zIndex: 1
+    zIndex: 1,
+    paddingBottom: 2,
+    paddingTop: 8
   },
   contentInput: {
-      lineHeight: 20,
-      width: "100%",
-      letterSpacing: 9,
-      backgroundColor: '#fff'
+    lineHeight: 20,
+    width: "100%",
+    letterSpacing: 6,
+    paddingLeft: 6,
+    paddingRight: 7,
   },
   sendIndentation: {
-    position: 'absolute',
+    position: "absolute",
     width: "20%",
     height: 10,
     backgroundColor: theme.yellow,
@@ -230,24 +248,24 @@ color: theme.crimson
     borderBottomWidth: 2,
     borderLeftWidth: 2,
     borderRightWidth: 2,
-    borderColor: theme.electric, 
+    borderColor: theme.electric,
     borderBottomEndRadius: 2,
-    borderBottomLeftRadius: 2
+    borderBottomLeftRadius: 2,
   },
   noteOutput: {
-    position: 'absolute',
+    position: "absolute",
     width: "20%",
     height: 10,
     backgroundColor: theme.yellow,
     bottom: -1,
     left: 40,
     borderTopEndRadius: 2,
-    borderTopLeftRadius: 2
+    borderTopLeftRadius: 2,
   },
   cablesWrapper: {
     zIndex: 3,
     width: "100%",
-    position: 'absolute',
-    bottom: 0
-  }
+    position: "absolute",
+    bottom: 0,
+  },
 });
