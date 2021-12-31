@@ -12,4 +12,5 @@ export const theme = {
   bluePrimary: "#48eff9",
   darkSlateGray: "#12484c",
   crimson: "#e83123",
+  textBlack: "#202020",
 };

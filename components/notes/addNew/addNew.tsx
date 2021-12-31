@@ -1,4 +1,9 @@
-import React, { FunctionComponent, useState } from "react";
+import React, {
+  FunctionComponent,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import {
   TextInput,
   View,
@@ -6,21 +11,48 @@ import {
   Text,
   Dimensions,
   Pressable,
-  Keyboard
+  Keyboard,
 } from "react-native";
 import { theme } from "../../../styles/theme";
 import { IFNoteData } from "../../../types";
 import { Corner } from "../../general/corner";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { CableConnectionDecoration } from "./cableConnectionDecoration";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../../firebase/config";
+import { addNewDocument } from "../../../firebase/addNewDocument";
+import { useNavigation } from "@react-navigation/native";
 
 export const AddNewNote: FunctionComponent = () => {
+
+  // reference
+  const navigation = useNavigation();
+
+  const [userId, setUserId] = useState<null | string>(null);
+
   // data about note
   const [note, setNote] = useState<IFNoteData>({
     title: "",
-    content:
-      "asdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd asddddddddddddddddddddddddddddddddd asddddddddddddddddddddddddddddddddd asdddddddddddddddddddddddddddddddd assssssssssssssssssssssssssss assssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss ",
+    content: "",
   });
+
+  // set the id of logged user in order to give access to this id for the function which is responsible for adding new note
+  useEffect(() => {
+    return onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUserId(user.uid);
+      }
+    });
+  }, []);
+
+  const handleAddNewNote = useCallback(() => {
+    const uid = userId as string;
+    const data = { ...note, created: new Date() };
+    return addNewDocument(uid, "notes", data).then(() => {
+           // @ts-ignore
+           navigation.navigate('notes');
+    });
+  }, [note]);
 
   /**
    * change note state
@@ -80,14 +112,18 @@ export const AddNewNote: FunctionComponent = () => {
       <KeyboardAwareScrollView>
         <View style={styles.contentWrapper}>
           <TextInput
-      style={styles.contentInput}
-        multiline={true}
-        numberOfLines={4}
-        onChangeText={v => handleChangeNote(v, 'content')}
-        // @ts-ignore
-        value={note.content}
-        onSubmitEditing={()=>{Keyboard.dismiss()}}
-      />
+            style={styles.contentInput}
+            multiline={true}
+            numberOfLines={4}
+            onChangeText={(v) => handleChangeNote(v, "content")}
+            // @ts-ignore
+            value={note.content}
+            onSubmitEditing={() => {
+              Keyboard.dismiss();
+            }}
+            placeholder="Put note title here"
+            placeholderTextColor={theme.textBlack}
+          />
 
           {/* decorations */}
           <View style={styles.noteOutput} />
@@ -97,7 +133,7 @@ export const AddNewNote: FunctionComponent = () => {
         </View>
 
         <View style={styles.sendButtonWrapper}>
-          <Pressable style={styles.sendButton}>
+          <Pressable style={styles.sendButton} onPress={handleAddNewNote}>
             <Text style={styles.sendText}> Add note to cyberdesk</Text>
           </Pressable>
 
@@ -139,8 +175,6 @@ export const AddNewNote: FunctionComponent = () => {
 };
 
 const styles = StyleSheet.create({
-
-  
   sendButtonWrapper: {
     marginTop: 57,
     overflow: "hidden",
@@ -173,7 +207,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: "bold",
     letterSpacing: 1,
-    color: '#fff'
+    color: "#fff",
   },
   sendTitle: {
     fontSize: 16,
@@ -184,7 +218,7 @@ const styles = StyleSheet.create({
   container: {
     paddingLeft: 12,
     paddingRight: 12,
-    height: '100%',
+    height: "100%",
   },
   titleWrapper: {
     position: "relative",
@@ -229,12 +263,13 @@ const styles = StyleSheet.create({
     position: "relative",
     zIndex: 1,
     paddingBottom: 2,
-    paddingTop: 8
+    paddingTop: 8,
   },
   contentInput: {
     lineHeight: 20,
     width: "100%",
-    letterSpacing: 6,
+    fontSize: 17,
+    letterSpacing: 2,
     paddingLeft: 6,
     paddingRight: 7,
   },
