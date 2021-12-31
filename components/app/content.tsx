@@ -95,8 +95,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     position: "relative",
-    borderWidth: 2,
-    borderColor: "blue",
   },
   image: {
     flex: 1,
