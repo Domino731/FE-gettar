@@ -4,6 +4,7 @@ export const theme = {
     bloodRed: "#710000",
     yellow: "#FDF500",
     keppel: "#1AC5B0",
+    electric: "#02d7f2",
     purple: "#9370DB",
     frostbite: "#E455AE",
     steelPink: "#CB1DCD",
