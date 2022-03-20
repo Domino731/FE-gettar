@@ -1,6 +1,7 @@
 import React from "react";
 import {Text, View} from "react-native";
 import {Container, Title, TitleShadow, TitleWrapper} from "./components/styles";
+import {ActionBar} from "./actionBar";
 
 export const Auth: React.FC = () => {
     return <Container>
@@ -9,5 +10,6 @@ export const Auth: React.FC = () => {
             <TitleShadow>GETTAR</TitleShadow>
         </TitleWrapper>
 
+        <ActionBar/>
     </Container>
 }
