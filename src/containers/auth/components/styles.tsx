@@ -101,8 +101,9 @@ bottom: ${(props: any) => props.position === 'TOP' ? '-25px' : 'auto'};
 transform: rotate(50deg);
 backgroundColor: ${({theme}: any) => theme.black};
 `
-export const InputWrapper = styled.View`
+export const FormikInputWrapper = styled.View`
 display: flex;
+flexDirection: row;
 height: 50px;
 marginBottom: 20;
 `
@@ -124,3 +125,47 @@ transform: rotate(45deg);
 left: -13px;
 top: -13px;
 `
+
+export const InputIconTriangleBottom = styled.View`
+width: 8px;
+height: 8px;
+backgroundColor: ${({theme}: any) => theme.black};
+position: absolute;
+transform: rotate(45deg);
+left: -4px;
+bottom: -4px;
+`
+
+export const InputWrapper = styled.View`
+width: 40px;
+height: 100%;
+flex: 1;
+position: relative;
+overflow: hidden;
+`
+
+export const InputWrapperTriangleTop = styled.View`
+width: 8px;
+height: 8px;
+backgroundColor: ${({theme}: any) => theme.black};
+position: absolute;
+transform: rotate(45deg);
+right: -4px;
+top: -4px;
+zIndex: 20;
+border: 1px solid ${({theme}: any) => theme.yellow};
+`
+
+export const InputWrapperTriangleBottom = styled.View`
+width: 8px;
+height: 8px;
+backgroundColor: ${({theme}: any) => theme.black};
+position: absolute;
+transform: rotate(45deg);
+right: -4px;
+bottom: -4px;
+zIndex: 20;
+border: 1px solid ${({theme}: any) => theme.yellow};
+`
+
+export const TextInputWrapper = styled.TextInput``
