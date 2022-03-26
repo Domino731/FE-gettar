@@ -1,5 +1,6 @@
 import styled from "styled-components/native";
 import {theme as appTheme} from "../../../styles/theme";
+import {ACTION_WAVE_PROPS_POSITION} from "./ActionWave";
 
 export const Container = styled.View` 
 backgroundColor: ${({theme}: any) => theme.black};
@@ -63,18 +64,35 @@ fontSize: 17px;
 export const ActionTopWave = styled.View`
 position: absolute;
 width: 60px;
-height: 5px;
+height: 6px;
 top: 0;
 left: 0;
 backgroundColor: ${({theme}: any) => theme.yellow};
+overflow: hidden;
 `;
 
 export const ActionBottomWave = styled.View`
 position: absolute;
 width: 60px;
-height: 5px;
+height: 6px;
 bottom: 0;
 right: 0;
 backgroundColor: ${({theme}: any) => theme.yellow};
-border-radius: 50;
+overflow: hidden;
 `;
+
+interface ActionWaveSharpElementProps {
+    position: keyof typeof ACTION_WAVE_PROPS_POSITION;
+}
+
+export const ActionWaveSharpElement = styled.View<ActionWaveSharpElementProps>`
+position: absolute;
+width: 30px;
+height: 30px;
+left: ${(props: any) => props.position === 'BOTTOM' ? '-20px' : 'auto'};
+top: ${(props: any) => props.position === 'BOTTOM' ? '-25px' : 'auto'};
+right: ${(props: any) => props.position === 'TOP' ? '-20px' : 'auto'};
+bottom: ${(props: any) => props.position === 'TOP' ? '-25px' : 'auto'};
+transform: rotate(50deg);
+backgroundColor: ${({theme}: any) => theme.black};
+`
