@@ -115,23 +115,31 @@ backgroundColor: ${({theme}: any) => theme.yellow};
 position: relative;
 overflow: hidden;
 `
-
-export const InputIconTriangleTop = styled.View`
+const bigTriangleProps = `
 width: 26px;
 height: 26px;
-backgroundColor: ${({theme}: any) => theme.black};
 position: absolute;
 transform: rotate(45deg);
+zIndex: 20;
+`
+
+const smallTriangleProps = `
+width: 10px;
+height: 10px;
+position: absolute;
+transform: rotate(45deg);
+zIndex: 20;
+`
+export const InputIconTriangleTop = styled.View`
+${bigTriangleProps}
+backgroundColor: ${({theme}: any) => theme.black};
 left: -13px;
 top: -13px;
 `
 
 export const InputIconTriangleBottom = styled.View`
-width: 10px;
-height: 10px;
+${smallTriangleProps}
 backgroundColor: ${({theme}: any) => theme.black};
-position: absolute;
-transform: rotate(45deg);
 left: -5px;
 bottom: -5px;
 `
@@ -145,26 +153,18 @@ overflow: hidden;
 `
 
 export const InputWrapperTriangleTop = styled.View`
-width: 10px;
-height: 10px;
+${smallTriangleProps}
 backgroundColor: ${({theme}: any) => theme.black};
-position: absolute;
-transform: rotate(45deg);
 right: -5px;
 top: -5px;
-zIndex: 20;
 border: 1px solid ${({theme}: any) => theme.yellow};
 `
 
 export const InputWrapperTriangleBottom = styled.View`
-width: 10px;
-height: 10px;
+${smallTriangleProps}
 backgroundColor: ${({theme}: any) => theme.black};
-position: absolute;
-transform: rotate(45deg);
 right: -5px;
 bottom: -5px;
-zIndex: 20;
 border: 1px solid ${({theme}: any) => theme.yellow};
 `
 
@@ -177,47 +177,31 @@ position: relative;
 overflow: hidden;
 `
 export const ButtonWrapperTriangleRightTop = styled.View`
-width: 10px;
-height: 10px;
+${smallTriangleProps}
 backgroundColor: ${({theme}: any) => theme.black};
-position: absolute;
-transform: rotate(45deg);
 right: -5px;
 bottom: -5px;
-zIndex: 20;
 `;
 
 export const ButtonWrapperTriangleRightBottom = styled.View`
-width: 10px;
-height: 10px;
+${smallTriangleProps}
 backgroundColor: ${({theme}: any) => theme.black};
-position: absolute;
-transform: rotate(45deg);
 right: -5px;
 top: -5px;
-zIndex: 20;
 `;
 
 export const ButtonWrapperTriangleLeftBottom = styled.View`
-width: 26px;
-height: 26px;
+${bigTriangleProps}
 backgroundColor: ${({theme}: any) => theme.black};
-position: absolute;
-transform: rotate(45deg);
 left: -13px;
 bottom: -13px;
-zIndex: 20;
 `;
 
 export const ButtonWrapperTriangleLeftTop = styled.View`
-width: 10px;
-height: 10px;
+${smallTriangleProps}
 backgroundColor: ${({theme}: any) => theme.black};
-position: absolute;
-transform: rotate(45deg);
 left: -5px;
 top: -5px;
-zIndex: 20;
 `;
 
 export const FormikButton = styled.Pressable`
@@ -239,5 +223,5 @@ marginBottom: 20px;
 marginLeft: 50px;
 height: 70px;
 width: 1px;
-backgroundColor: ${({theme}: any) => theme.yellow};
+backgroundColor: ${({theme}: any) => theme.electric};
 `
