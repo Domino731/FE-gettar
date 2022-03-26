@@ -1,5 +1,4 @@
 import React from "react";
-import {Text, View} from "react-native";
 import {AuthFormikWrapper} from "./FormikWrapper";
 import {LoginConfig} from "./authConfig";
 

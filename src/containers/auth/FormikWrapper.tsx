@@ -10,7 +10,7 @@ interface AuthFormikWrapperProps {
 
 export const AuthFormikWrapper: React.FC<AuthFormikWrapperProps> = ({config}) => {
     return <Formik initialValues={{}} onSubmit={() => console.log(12)}>
-        <View>
+        <View style={{marginTop: 35}}>
             {config.map((el: AuthConfigInterface) => <FormikInput config={el} key={`auth-input-${el.name}`}/>)}
         </View>
     </Formik>

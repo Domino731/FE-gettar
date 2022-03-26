@@ -1,4 +1,6 @@
 import React from "react";
-import {Text, View} from "react-native";
+import {AuthFormikWrapper} from "./FormikWrapper";
+import {PasswordRecoveryConfig} from "./authConfig";
 
-export const PasswordRecovery: React.FC = () => <View><Text>PasswordRecovery</Text></View>
+
+export const PasswordRecovery: React.FC = () => <AuthFormikWrapper config={PasswordRecoveryConfig}/>

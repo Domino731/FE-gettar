@@ -1,4 +1,5 @@
 import React from "react";
-import {Text, View} from "react-native";
+import {AuthFormikWrapper} from "./FormikWrapper";
+import {RegisterConfig} from "./authConfig";
 
-export const Register: React.FC = () => <View><Text>Register</Text></View>
+export const Register: React.FC = () => <AuthFormikWrapper config={RegisterConfig}/>
