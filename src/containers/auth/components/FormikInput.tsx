@@ -11,6 +11,6 @@ interface InputProps {
 export const FormikInput: React.FC<InputProps> = ({config}) => {
     return <FormikInputWrapper>
         <InputIcon/>
-        <Input/>
+        <Input config={config}/>
     </FormikInputWrapper>
 }

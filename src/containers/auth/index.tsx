@@ -1,11 +1,9 @@
 import React, {useState, useCallback} from "react";
-import {Text, View} from "react-native";
 import {Container, Title, TitleShadow, TitleWrapper} from "./components/styles";
 import {ActionBar} from "./ActionBar";
 import {AUTH_TABS_INDEX} from "./types";
-import {Login} from "./Login";
-import {Register} from "./Register";
-import {PasswordRecovery} from "./PasswordRecovery";
+import {AuthFormikWrapper} from "./FormikWrapper";
+import {LoginConfig, PasswordRecoveryConfig, RegisterConfig} from "./authConfig";
 
 export const Auth: React.FC = () => {
 
@@ -23,8 +21,9 @@ export const Auth: React.FC = () => {
 
         <ActionBar onButtonPress={handleChangeTabIndex} currentTab={tabIndex}/>
 
-        {tabIndex === 0 && <Login/>}
-        {tabIndex === 1 && <Register/>}
-        {tabIndex === 2 && <PasswordRecovery/>}
+        {tabIndex === 0 && <AuthFormikWrapper config={LoginConfig} label="Zaloguj"/>}
+        {tabIndex === 1 && <AuthFormikWrapper config={RegisterConfig} label="Zarejestruj się"/>}
+        {tabIndex === 2 && <AuthFormikWrapper config={PasswordRecoveryConfig} label="Wyślij e-mail"/>}
+
     </Container>
 }
