@@ -56,9 +56,14 @@ justifyContent: center;
 alignItems: center;
 `
 
-export const ActionText = styled.Text`
-color: white;
+interface ActionText {
+    active: boolean;
+}
+
+export const ActionText = styled.Text<ActionText>`
+color: ${(props: any) => props.active ? props.theme.electric : 'white'};
 fontSize: 17px;
+fontWeight: bold;
 `;
 
 export const ActionTopWave = styled.View`

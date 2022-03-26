@@ -1,8 +1,11 @@
 import React, {useState, useCallback} from "react";
 import {Text, View} from "react-native";
 import {Container, Title, TitleShadow, TitleWrapper} from "./components/styles";
-import {ActionBar} from "./actionBar";
+import {ActionBar} from "./ActionBar";
 import {AUTH_TABS_INDEX} from "./types";
+import {Login} from "./Login";
+import {Register} from "./Register";
+import {PasswordRecovery} from "./PasswordRecovery";
 
 export const Auth: React.FC = () => {
 
@@ -18,7 +21,10 @@ export const Auth: React.FC = () => {
             <TitleShadow>GETTAR</TitleShadow>
         </TitleWrapper>
 
-        <ActionBar onButtonPress={handleChangeTabIndex}  currentTab={tabIndex}/>
+        <ActionBar onButtonPress={handleChangeTabIndex} currentTab={tabIndex}/>
 
+        {tabIndex === 0 && <Login/>}
+        {tabIndex === 1 && <Register/>}
+        {tabIndex === 2 && <PasswordRecovery/>}
     </Container>
 }
