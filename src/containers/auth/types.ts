@@ -3,3 +3,8 @@ export enum AUTH_TABS_INDEX {
     REGISTER = 1,
     PASSWORD_RECOVERY = 2
 }
+
+export interface AuthConfigInterface {
+    name: string;
+    label: string;
+}

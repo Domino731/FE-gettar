@@ -101,3 +101,26 @@ bottom: ${(props: any) => props.position === 'TOP' ? '-25px' : 'auto'};
 transform: rotate(50deg);
 backgroundColor: ${({theme}: any) => theme.black};
 `
+export const InputWrapper = styled.View`
+display: flex;
+height: 50px;
+marginBottom: 20;
+`
+
+export const InputIconWrapper = styled.View`
+height: 100%;
+width: 50px;
+backgroundColor: ${({theme}: any) => theme.yellow};
+position: relative;
+overflow: hidden;
+`
+
+export const InputIconTriangleTop = styled.View`
+width: 26px;
+height: 26px;
+backgroundColor: ${({theme}: any) => theme.black};
+position: absolute;
+transform: rotate(45deg);
+left: -13px;
+top: -13px;
+`
