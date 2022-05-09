@@ -4,7 +4,7 @@ import {
     ButtonWrapperTriangleLeftBottom, ButtonWrapperTriangleLeftTop,
     ButtonWrapperTriangleRightBottom,
     ButtonWrapperTriangleRightTop,
-    FormikButton, FormikButtonText
+    FormikButton, FormikButtonDecorationLine, FormikButtonText
 } from "./styles";
 
 interface ButtonProps {
@@ -18,6 +18,7 @@ export const Button: React.FC<ButtonProps> = ({onPress, label}) => {
         <ButtonWrapperTriangleRightBottom/>
         <ButtonWrapperTriangleLeftBottom/>
         <ButtonWrapperTriangleLeftTop/>
+        <FormikButtonDecorationLine/>
         <FormikButton onPress={onPress}><FormikButtonText>{label}</FormikButtonText></FormikButton>
     </ButtonWrapper>
 }

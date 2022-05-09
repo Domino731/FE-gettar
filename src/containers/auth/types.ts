@@ -1,3 +1,5 @@
+import {ICON_NAME} from "../../utils/images";
+
 export enum AUTH_TABS_INDEX {
     LOGIN = 0,
     REGISTER = 1,
@@ -7,4 +9,5 @@ export enum AUTH_TABS_INDEX {
 export interface AuthConfigInterface {
     name: string;
     label: string;
+    iconName: keyof typeof ICON_NAME;
 }

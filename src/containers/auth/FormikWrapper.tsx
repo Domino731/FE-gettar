@@ -18,7 +18,5 @@ export const AuthFormikWrapper: React.FC<AuthFormikWrapperProps> = ({config, lab
             <FormikDecorationLine/>
             <Button onPress={() => console.log(values)} label={label}/>
         </View>}
-
-
     </Formik>
 }

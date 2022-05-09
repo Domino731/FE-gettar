@@ -10,7 +10,7 @@ interface InputProps {
 
 export const FormikInput: React.FC<InputProps> = ({config}) => {
     return <FormikInputWrapper>
-        <InputIcon/>
+        <InputIcon iconName={config.iconName}/>
         <Input config={config}/>
     </FormikInputWrapper>
 }

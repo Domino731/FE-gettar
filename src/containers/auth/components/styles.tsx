@@ -114,6 +114,9 @@ width: 50px;
 backgroundColor: ${({theme}: any) => theme.yellow};
 position: relative;
 overflow: hidden;
+display: flex;
+alignItems: center;
+justifyContent: center;
 `
 const bigTriangleProps = `
 width: 26px;
@@ -212,6 +215,14 @@ alignItems: center;
 justifyContent: center;
 `;
 
+export const FormikButtonDecorationLine = styled.View`
+position: absolute;
+right: 40px;
+width: 2px;
+height: 100%;
+background: ${({theme}) => theme.black};
+`;
+
 export const FormikButtonText = styled.Text`
 fontWeight: bold;
 fontSize: 30px;
@@ -222,6 +233,6 @@ export const FormikDecorationLine = styled.View`
 marginBottom: 20px;
 marginLeft: 50px;
 height: 70px;
-width: 1px;
+width: 2px;
 backgroundColor: ${({theme}: any) => theme.electric};
 `
