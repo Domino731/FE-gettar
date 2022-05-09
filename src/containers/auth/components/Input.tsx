@@ -11,12 +11,12 @@ interface InputProps {
 
 export const Input: React.FC<InputProps> = ({config}) => {
     const [field] = useField(config.name);
+
     return <InputWrapper>
         <InputWrapperTriangleTop/>
         <InputWrapperTriangleBottom/>
         <TextInput
-            value={field.value}
-            onChange={field.onChange}
+            onChangeText={(v) => field.onChange({target: {name: config.name, value: v}})}
             style={{
                 height: 50,
                 borderColor: theme.yellow,
